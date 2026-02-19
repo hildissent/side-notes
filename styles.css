@@ -1,0 +1,100 @@
+/*
+ * Side Notes — Styles
+ *
+ * Two stacking wrappers hold one or more .side-note <aside> elements:
+ *   Live Preview:  .side-note-anchor  (span, from the CM widget)
+ *   Reading View:  .side-note-stack   (div, from the post-processor)
+ *
+ * Both wrappers are absolutely positioned to the left of the content
+ * and use flex-column to stack their children vertically.
+ */
+
+/* ——— Shared stack layout ——— */
+
+.side-note-anchor,
+.side-note-stack {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    width: 200px;
+    margin-right: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ——— Reading view container ——— */
+
+.side-note-container {
+    position: relative;
+}
+
+/* ——— Individual side note ——— */
+
+.side-note {
+    color: var(--interactive-accent);
+    font-size: 0.85em;
+    line-height: 1.4;
+    padding: 2px 12px 2px 0;
+    text-align: right;
+    border-right: 1px solid var(--interactive-accent);
+}
+
+.side-note p {
+    margin: 0 !important;
+    display: inline;
+}
+
+.side-note a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.side-note * {
+    color: inherit !important;
+    pointer-events: auto;
+}
+
+/* ——— Mobile: collapse inline ——— */
+
+@media (max-width: 768px) {
+    .side-note-anchor,
+    .side-note-stack {
+        position: relative;
+        right: auto;
+        top: auto;
+        width: 100%;
+        margin-right: 0;
+        pointer-events: auto;
+    }
+
+    .side-note {
+        padding: 6px 10px;
+        text-align: left;
+        border-right: none;
+        border-top: 1px solid var(--interactive-accent);
+    }
+}
+
+/* ——— Reading view: nudge stack down to align with text baseline ——— */
+
+.markdown-reading-view .side-note-stack {
+    top: 2px;
+}
+
+/* ——— Live Preview: push stack left of bullet markers in lists ——— */
+/* TWEAK: adjust this value to align list side notes with paragraph side notes in Live Preview */
+.HyperMD-list-line .side-note-anchor {
+    margin-right: 15px;
+}
+
+/* ——— Reading view: push stack left of bullet markers in lists ——— */
+/* TWEAK: adjust this value to align list side notes with paragraph side notes in Reading View */
+.markdown-reading-view li.side-note-container > .side-note-stack {
+    margin-right: 45px;
+}

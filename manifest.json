@@ -1,0 +1,9 @@
+{
+	"id": "side-notes",
+	"name": "Side Notes",
+	"version": "1.0.0",
+	"minAppVersion": "1.0.0",
+	"description": "Render side notes in both Live Preview and Reading View.",
+	"author": "Travis Heldibridle",
+	"isDesktopOnly": false
+}
